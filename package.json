@@ -1,12 +1,11 @@
 {
   "name": "node",
   "version": "1.0.0",
-  "type": "module",
-  "description": "",
-  "main": "index.js",
+  "main": "api.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build":"netlify deploy --prod"
+    "build": "netlify deploy --prod",
+    "start": "nodemon ./functions/api.js"
   },
   "author": "",
   "license": "ISC",
@@ -16,5 +15,15 @@
     "netlify-cli": "^15.8.0",
     "netlify-lambda": "^2.0.16",
     "serverless-http": "^3.2.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/projects7827/mainserver.git"
+  },
+  "bugs": {
+    "url": "https://github.com/projects7827/mainserver/issues"
+  },
+  "homepage": "https://github.com/projects7827/mainserver#readme",
+  "description": ""
 }
