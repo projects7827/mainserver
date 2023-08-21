@@ -1,7 +1,7 @@
 {
   "name": "node",
   "version": "1.0.0",
-  "main": "api.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "netlify deploy --prod",
@@ -12,11 +12,12 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "mongoose": "^7.4.3",
     "netlify-cli": "^15.8.0",
     "netlify-lambda": "^2.0.16",
     "serverless-http": "^3.2.0"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/projects7827/mainserver.git"
