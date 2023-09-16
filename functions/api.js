@@ -72,7 +72,6 @@ function getInputDetails(inputData = {}) {//processing of state,country and citi
 
 
 router.get("/get-input-data", (req, res) => { //use to get country,state,city list
-  let queryParam = req.query
   let response = getInputDetails(req.query)
   let statusCode;
   if (response["status"] === "success") {
