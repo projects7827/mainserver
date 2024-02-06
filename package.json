@@ -18,7 +18,9 @@
     "netlify-cli": "^15.8.0",
     "netlify-lambda": "^2.0.16",
     "node-cache": "^5.1.2",
-    "serverless-http": "^3.2.0"
+    "serverless-http": "^3.2.0",
+    "seo-analyzer": "^2.1.0",
+    "seo-checker": "^0.3.2"
   },
   "repository": {
     "type": "git",
