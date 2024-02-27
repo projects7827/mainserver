@@ -11,7 +11,7 @@ app.use(express.json())
 // app.use("/", user_info_router)
 // app.use('/.netlify/functions/api/analyze-seo', seoRouter)
 app.use('/.netlify/functions/api', user_info_router)
-app.listen(process.env.PORT || 1000, () => {
-    console.log("connected")
-})
+// app.listen(1000, () => {
+//     console.log("connected")
+// })
 module.exports.handler = serverless(app)
