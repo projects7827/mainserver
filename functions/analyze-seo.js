@@ -1,8 +1,10 @@
 let express = require("express")
 let router = express.Router();
+let analyze_seo  = require("./seo")
 
 
 router.get("/", (req, res) => {
+    console.log('pt')
     res.send("pt")
 })
 

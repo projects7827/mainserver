@@ -4,8 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "netlify deploy --prod",
-    "start": "nodemon ./functions/api.js"
+    "deploy": "netlify deploy --prod",
+    "dev": "nodemon ./functions/api.js"
   },
   "author": "",
   "license": "ISC",
@@ -18,9 +18,10 @@
     "netlify-cli": "^15.8.0",
     "netlify-lambda": "^2.0.16",
     "node-cache": "^5.1.2",
-    "serverless-http": "^3.2.0",
+    "path": "^0.12.7",
     "seo-analyzer": "^2.1.0",
-    "seo-checker": "^0.3.2"
+    "seo-checker": "^0.3.2",
+    "serverless-http": "^3.2.0"
   },
   "repository": {
     "type": "git",

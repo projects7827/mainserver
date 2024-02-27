@@ -2,19 +2,23 @@
 const seochecker = require("seo-checker")
 const fs = require("fs")
 const SeoAnalyzer = require("seo-analyzer")
+const path = require("path")
 
 let elements_info = { "elements_info": {}, "errors": [] };
 
+
 function analyze_seo(input_url, on_data_success = () => { }, on_error = () => { }) {
     try {
+        const rootDir = process.cwd();
+        const filePath = path.join(rootDir, `./content/process.html`);
         seochecker.load(input_url, function (response) {
             if (!response) { // response will be false on error
                 console.log(response)
                 // error
             } else {
-                fs.writeFileSync(`./dist/sample.html`, Buffer.from(response))
+                fs.writeFileSync(filePath, Buffer.from(response))
                 new SeoAnalyzer()
-                    .inputFiles(['./dist/sample.html'])
+                    .inputFiles([filePath])
                     .addRule('imgTagWithAltAttributeRule')
                     .addRule('titleLengthRule', { min: 10, max: 60 })
                     .addRule('aTagWithRelAttributeRule')
@@ -54,6 +58,7 @@ function analyze_seo(input_url, on_data_success = () => { }, on_error = () => { 
             }
         });
     }
+
     catch (err) {
         on_error(err);
     }

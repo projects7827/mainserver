@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        #seo_table {
+            display: none;
+        }
+
+        #seo_loader {
+            position: fixed;
+            top: 0px;
+            right: 0px;
+            left: 0px;
+            bottom: 0px;
+            background: black;
+            opacity: 0.8;
+            z-index: 1;
+            height: 100%;
+            width: 100%;
+            display: none;
+            place-items: center;
+            justify-content: center;
+            font-size: 30px;
+            color: white;
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <div id="seo_loader">Processing....</div>
+    <header class="text-gray-600 body-font">
+        <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+            <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round"
+                    stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
+                    viewBox="0 0 24 24">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                </svg>
+                <span class="ml-3 text-xl">Tailblocks</span>
+            </a>
+            <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+                <a class="mr-5 hover:text-gray-900">First Link</a>
+                <a class="mr-5 hover:text-gray-900">Second Link</a>
+                <a class="mr-5 hover:text-gray-900">Third Link</a>
+                <a class="mr-5 hover:text-gray-900">Fourth Link</a>
+            </nav>
+            <button
+                class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">Button
+                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <section class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="flex flex-col text-center w-full mb-12">
+                <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Seo Analyzer</h1>
+                <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Whatever cardigan tote bag tumblr hexagon brooklyn
+                    asymmetrical gentrify, subway tile poke farm-to-table. Franzen you probably haven't heard of them
+                    man bun deep.</p>
+            </div>
+            <div
+                class="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
+                <div class="relative flex-grow w-full">
+                    <label for="full-name" class="leading-7 text-sm text-gray-600">Enter Url</label>
+                    <input type="text" id="input_url"
+                        class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                </div>
+
+                <button
+                    class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+                    onclick="submit_url()">Submit</button>
+            </div>
+            <br /><br />
+
+            <!-- table section -->
+            <div id="seo_table">
+                <div
+                    class="text-center lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
+                    <button id="details_btn" onClick="render_data_to_table('details')"
+                        class="text-white border-0 py-2 px-8 focus:outline-none rounded text-lg">Seo
+                        Details</button>
+                    <button id="errors_btn" onClick="render_data_to_table('errors')"
+                        class="text-white border-0 py-2 px-8 focus:outline-none rounded text-lg">Seo
+                        Errors</button>
+                </div>
+                <br />
+                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">
+                                    Heading
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Information
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="seo_error_table">
+                            <!-- <tr
+                                class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                                <td class="px-6 py-4">
+                                    Silver
+                                </td>
+                                <td class="px-6 py-4">
+                                    Silver
+                                </td>
+                            </tr> -->
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+</body>
+<script>
+
+    let selected_tab = "errors", final_data = [], final_result;
+    function show_loader(show) {
+        document.querySelector("#seo_loader").style.display = show === true ? "flex" : "none"
+    }
+
+    function submit_url() {
+        // let url = 'http://localhost:1000/analyze-seo';
+        let url = '/.netlify/functions/api/analyze-seo'
+        let input_url = document.getElementById("input_url").value;
+        let option = { "headers": { "Content-Type": "application/json" }, body: JSON.stringify({ input_url }), method: "post" }
+        show_loader(true)
+        fetch(url, option).then((res) => {
+            if (res.ok) {
+                return res.json()
+            }
+            throw new Error(res)
+        }).then((result) => {
+            show_loader(false)
+            if (result["status"] === "failure") {
+                console.log("failure")
+            }
+            else {
+                document.querySelector("#seo_table").style.display = "block"
+                final_result = result;
+                render_data_to_table("errors")
+            }
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
+
+    function render_data_to_table(section) {
+        show_loader(true)
+        let final_data = [];
+        let arr = Object.keys(final_result["data"]["elements_info"])
+
+        if (section === "errors") {
+            arr = final_result["data"]["errors"]
+            document.querySelector("#errors_btn").style.background = "green"
+            document.querySelector("#details_btn").style.background = "indigo"
+            if (arr.length === 0) {
+                alert("No Errors Found")
+            }
+        }
+        else {
+            document.querySelector("#details_btn").style.background = "green"
+            document.querySelector("#errors_btn").style.background = "indigo"
+        }
+        for (let i = 0; i < arr.length; i++) {
+            let value, heading = i + 1;
+            if (section === "details") {
+                heading = arr[i];
+                value = final_result["data"]["elements_info"][heading]
+            }
+            else {
+                heading = "Error " + (i + 1);
+                value = final_result["data"]["errors"][i].replace(/>/g, "&gt;").replace(/</g, "&lt;")
+            }
+            final_data.push(`<tr
+                                class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                                <td class="px-6 py-4">
+                                     ${heading}
+                                </td>
+                                <td class="px-6 py-4">
+                                    ${value}
+                                </td>
+                            </tr>`)
+        }
+        document.querySelector("#seo_error_table").innerHTML = final_data
+        show_loader(false)
+    }
+</script>
+
+
+</html>

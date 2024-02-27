@@ -11,7 +11,6 @@ var userSchema = new mongoose.Schema({
     "dob": Date,
     "age": Number
 });
-
 mongoose.connect(`mongodb+srv://Prateek:ajstyles@cluster0.hll3k7h.mongodb.net/Prateek`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
