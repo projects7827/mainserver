@@ -3,11 +3,11 @@ const mongooseModel = require("../models/employee");
 let express = require("express");
 let router = express.Router();
 let jwt = require('jsonwebtoken')
-let bcrypt = require('bcrypt')
 
 
 router.use((req, res, next) => {
-    if (req.originalUrl === "/employee/login") {
+    console.log(req.originalUrl)
+    if (req.originalUrl.match("/employee/login")) {
         next();
     }
     else {
