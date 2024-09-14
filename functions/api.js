@@ -1,11 +1,11 @@
 const express = require('express')
 const serverless = require('serverless-http')
-const user_info_router = require('./routes/manage_user_info.js');
+const user_info_router = require('../routes/manage_user_info.js');
 const cors = require('cors')
 const app = express();
-const seoRouter = require("./routes/analyze-seo.js")
+const seoRouter = require("../routes/analyze-seo.js")
 let mongoose = require('mongoose')
-let employee_router = require("./routes/employee.js")
+let employee_router = require("../routes/employee.js")
 require('dotenv').config()
 
 function main() {
